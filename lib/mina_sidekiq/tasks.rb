@@ -28,9 +28,13 @@ require 'mina/rails'
 # ## Settings
 # Any and all of these settings can be overriden in your `deploy.rb`.
 
+# ### sidekiq_redis_url
+# Sets redis_url
+set :sidekiq_redis_url, 'REDIS_URL=redis://127.0.0.1:6379/12'
+
 # ### sidekiq
 # Sets the path to sidekiq.
-set_default :sidekiq, lambda { "#{bundle_bin} exec sidekiq" }
+set_default :sidekiq, lambda { "#{sidekiq_redis_url} #{bundle_bin} exec sidekiq" }
 
 # ### sidekiqctl
 # Sets the path to sidekiqctl.
